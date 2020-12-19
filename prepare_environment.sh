@@ -1,7 +1,7 @@
 #!/bin/bash
 
-config_repo_name = "mephi_ds_bda_hw3_infrastructure"      # name of the github repository with configs and scrips
-app_repo_name    = "mephi_ds_bda_hw3_app"                 # name of the to the github repository with app code
+config_repo_name="mephi_ds_bda_hw3_infrastructure"      # name of the github repository with configs and scrips
+app_repo_name="mephi_ds_bda_hw3_app"                 # name of the to the github repository with app code
 
 virtualbox_setup() {
     sudo yum install –y patch gcc kernel-headers kernel-devel make perl wget

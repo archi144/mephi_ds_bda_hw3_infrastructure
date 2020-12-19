@@ -1,7 +1,7 @@
 #!/bin/bash
 
-config_repo_name = "mephi_ds_bda_hw3_infrastructure"      # name of the github repository with configs and scrips
-app_repo_name    = "mephi_ds_bda_hw3_app"                 # name of the to the github repository with app code
+config_repo_name="mephi_ds_bda_hw3_infrastructure"      # name of the github repository with configs and scrips
+app_repo_name="mephi_ds_bda_hw3_app"                 # name of the to the github repository with app code
 
 logstash_setup() {
     logstash_version=$1
@@ -11,7 +11,7 @@ logstash_setup() {
     tar -xf logstash-*tar.gz
     echo "Setup LS_HOME env"
     echo "export LS_HOME=$(pwd)/logstash-$logstash_version" >> ~/.bashrc
-    source ~/.bashrc
+    . ~/.bashrc
     echo "LS_HOME=$LS_HOME is set up "
     echo "Starting Logstash in the background"
     nohup $LS_HOME/bin/logstash -f $config_repo_name/configs/logstash/$ls_config_name > logstash.log &
@@ -25,7 +25,7 @@ elastic_setup() {
     tar -xf elasticsearch-*tar.gz
     echo "Setup ES_HOME env"
     echo "export ES_HOME=$(pwd)/elasticsearch-$elastic_version" >> ~/.bashrc
-    source ~/.bashrc
+    . ~/.bashrc
     echo "ES_HOME=$ES_HOME is set up"
     echo "Starting Elasticsearch in the background"
     nohup $ES_HOME/bin/elasticsearch > elasticsearch.log &
@@ -39,7 +39,7 @@ grafana_setup() {
     tar -xf grafana-*.tar.gz
     echo "Setup GRAFANA_HOME env"
     echo "export GRAFANA_HOME=$(pwd)/grafana-$grafana_version" >> ~/.bashrc
-    source ~/.bashrc
+    . ~/.bashrc
     echo "GRAFANA_HOME=$GRAFANA_HOME is set up"
     echo "Provision datasources"
     cp $config_repo_name/configs/grafana/provisioning/datasources/datasource.yaml $GRAFANA_HOME/conf/provisioning/datasources/
@@ -55,10 +55,11 @@ app_setup() {
     sudo apt install -y python3-pip
     cd $app_repo_name
     pip3 install -r requirements.txt
-    python3 main.py pizza
+    nohup python3 main.py pizza > app.log &
 }
 
 main () {
+    cd ~
     sudo apt update -y
     elastic_setup 7.10.1
     logstash_setup 7.10.1
