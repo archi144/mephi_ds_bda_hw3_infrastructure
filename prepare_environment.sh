@@ -4,7 +4,7 @@ config_repo_name="mephi_ds_bda_hw3_infrastructure"      # name of the github rep
 app_repo_name="mephi_ds_bda_hw3_app"                 # name of the to the github repository with app code
 
 virtualbox_setup() {
-    sudo yum install –y patch gcc kernel-headers kernel-devel make perl wget
+    sudo yum install -y patch gcc kernel-headers kernel-devel make perl wget
     sudo wget http://download.virtualbox.org/virtualbox/rpm/el/virtualbox.repo -P /etc/yum.repos.d
     sudo yum install -y VirtualBox-6.0
 }
@@ -24,16 +24,13 @@ vagrant_setup() {
     pull_app
     echo "Pull app succeed"
     echo "Substitute secret files..."
-    cp -u ~/CREDENTIALS.txt $app_repo_name/
+    cp -v -u ~/CREDENTIALS.txt $app_repo_name/
     echo "Substitution succeed"
     echo "Starting Vagrant VM"
     vagrant up
-    echo "Uploading configs and scripts to the guest"
+    echo "Uploading configs, scripts and app to the guest"
     vagrant upload $config_repo_name
-    echo "Upload succeed"
-    echo "Uploading app sources to the guest"
     vagrant upload $app_repo_name
-    echo "Upload succeed"
 }
 
 pull_configs() {

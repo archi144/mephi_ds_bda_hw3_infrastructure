@@ -3,11 +3,13 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": "elasticsearch-v7",
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
+        "limit": 100,
         "name": "Annotations & Alerts",
+        "showIn": 0,
         "type": "dashboard"
       }
     ]
@@ -15,7 +17,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 4,
   "links": [],
   "panels": [
     {
@@ -23,36 +25,20 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "elasticsearch-v7",
+      "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {
-            "align": null,
-            "filterable": false
-          },
-          "displayName": "Count",
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
+          "custom": {},
+          "displayName": "Count of metrics for 1m"
         },
         "overrides": []
       },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 12,
-        "w": 16,
+        "h": 9,
+        "w": 12,
         "x": 0,
         "y": 0
       },
@@ -101,13 +87,12 @@
               "field": "count_of_tweets_per_min",
               "id": "1",
               "meta": {},
-              "pipelineAgg": "select metric",
               "settings": {},
               "type": "sum"
             }
           ],
-          "query": "",
-          "refId": "B",
+          "queryType": "randomWalk",
+          "refId": "A",
           "timeField": "@timestamp"
         }
       ],
@@ -115,7 +100,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Count of metrics from python app",
+      "title": "Count of metrics for 1m",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -153,7 +138,6 @@
       }
     }
   ],
-  "refresh": false,
   "schemaVersion": 26,
   "style": "dark",
   "tags": [],
@@ -166,7 +150,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "twitter-streaming-app",
-  "uid": "Mv0UNwJGz",
-  "version": 6
+  "title": "Count of  metrics for 1 min",
+  "uid": "eWOOwwJMk",
+  "version": 3
 }
